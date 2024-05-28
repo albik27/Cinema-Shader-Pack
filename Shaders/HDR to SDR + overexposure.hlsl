@@ -93,6 +93,6 @@ float4 main(float2 tex : TEXCOORD0) : COLOR {
   float3 pxval = tex2D(s0, tex).rgb;
   float3 lin = bt2020to709(pq2lin(pxval));
   float3 highlight = lin - 1.0;
-  float3 final = lin2srgb(splitval < 0.5 ? compress(lin) : highlight).rgbb;
-  return fixClip(final).rgbb;
+  float3 final = lin2srgb(splitval < 0.5 ? compress(lin) : highlight);
+  return float4(fixClip(final), 1.0);
 }
